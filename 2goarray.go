@@ -26,11 +26,11 @@ func main() {
 	}
 
 	if isTerminal() {
-		fmt.Println("\nPlease pipe the file you wish to encode into stdin\n")
+		fmt.Println("Please pipe the file you wish to encode into stdin")
 		return
 	}
 
-	fmt.Println(GENERATED_BY + "\n")
+	fmt.Println(GENERATED_BY)
 	fmt.Printf("package %s\n\n", os.Args[2])
 	fmt.Printf("var %s []byte = []byte{", os.Args[1])
 	buf := make([]byte, 1)
@@ -46,7 +46,8 @@ func main() {
 		n, err = os.Stdin.Read(buf)
 	}
 	if err != nil && err != io.EOF {
-		fmt.Errorf("Error: %v", err)
+		println("error:", err)
+		return
 	}
 	fmt.Print("\n}\n\n")
 }
